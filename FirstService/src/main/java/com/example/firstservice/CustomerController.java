@@ -30,34 +30,34 @@ public class CustomerController {
         return null;
     }
 
-    @RequestMapping("/customerbyname/{name}")
-    public Customer getCustomerByName(@PathVariable("name") String name){
+    @RequestMapping("/customerbyname/{n}")
+    public Customer getCustomerByName(@PathVariable("n") String n){
         for (Customer data: customers) {
-            if (name.equals(data.getName())){
+            if (n.equals(data.getName())){
                 return data;
             }
         }
         return null;
     }
 
-    @RequestMapping("/customerDelByname/{name}")
-    public boolean delCustomerByName(@PathVariable("name") String n){
-        for (int i = 0; i < customers.toArray().length; ++ i)  {
-            if (customers.get(i).getName().equals(n)){
-                return getCustomers().remove(customers.get(i));
+    @RequestMapping(value = "/customerDelByname/{n}", method = RequestMethod.DELETE)
+    public boolean delCustomerByName(@PathVariable("n") String n){
+        for (Customer data: customers) {
+            if (data.getName().equals(n)) {
+                return customers.remove(data);
             }
         }
-        return false;
+        return true;
     }
 
-    @RequestMapping("/customerDelByid/{id}")
+    @RequestMapping(value ="/customerDelByid/{id}", method = RequestMethod.DELETE)
     public boolean delCustomerByID(@PathVariable("id") String ID){
-        for (int i = 0; i < customers.toArray().length; ++ i)  {
-            if (customers.get(i).getID().equals(ID)){
-                return getCustomers().remove(customers.get(i));
+        for (Customer data: customers) {
+            if (data.getID().equals(ID)) {
+                return customers.remove(data);
             }
         }
-        return false;
+        return true;
     }
 
     @RequestMapping("/addCustomer")
